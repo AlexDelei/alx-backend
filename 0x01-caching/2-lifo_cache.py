@@ -9,6 +9,10 @@ class LIFOCache(BaseCaching):
     """
     Last In First Out Caching algorithm
     """
+    def __init__(self):
+        """initialize"""
+        super().__init__()
+
     def put(self, key, item):
         """
         LIFO - if the limit is exceeded, then delete the last item
@@ -19,11 +23,9 @@ class LIFOCache(BaseCaching):
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            for idx, i in enumerate(reversed(self.cache_data)):
-                if idx == 0:
-                    del self.cache_data[i]
-                    print("DISCARD:", i)
-                break
+            last = list(self.cache_data.keys())[-2]
+            del self.cache_data[last]
+            print("DISCARD: ", last)
 
     def get(self, key):
         """
