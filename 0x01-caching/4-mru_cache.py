@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-MRU
+MRU - Most Recently Used cache algorithm
 """
 from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
