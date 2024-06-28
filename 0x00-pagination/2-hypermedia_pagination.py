@@ -52,13 +52,14 @@ class Server:
         """
         A dict with the results of Hypermedia Pagination
         """
+        total_pages = math.ceil(len(self.dataset()) / page_size)
         hyper_results = {
             "page_size": page_size,
             "page": page,
             "data": self.get_page(page, page_size),
             "next_page": page,
             "prev_page": page,
-            "total_pages": len(self.get_page(page, page_size))
+            "total_pages": total_pages
         }
 
         try:
