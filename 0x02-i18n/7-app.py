@@ -32,12 +32,12 @@ def get_timezone():
     timeZone = request.args.get('timezone')
     if not timeZone:
         timeZone = app.config['BABEL_DEFAULT_TIMEZONE']
-    
+
     try:
         pytz.timezone(timeZone)
     except UnknownTimeZoneError:
         timeZone = app.config['BABEL_DEFAULT_TIMEZONE']
-    
+
     return timeZone
 
 
@@ -47,4 +47,3 @@ def home():
     Display page according to settings
     """
     return render_template('3-index.html')
-
