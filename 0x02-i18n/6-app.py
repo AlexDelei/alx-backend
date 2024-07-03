@@ -2,7 +2,7 @@
 """
 Use user locale
 """
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
@@ -45,3 +45,7 @@ def home():
     Display according to user's settings
     """
     return render_template('6-index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=False)
