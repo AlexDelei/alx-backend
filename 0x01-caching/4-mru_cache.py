@@ -2,7 +2,7 @@
 """
 MRU - Most Recently Used cache algorithm
 """
-from collections import OrderedDict
+from collections import OrderedDict, deque
 BaseCaching = __import__('base_caching').BaseCaching
 
 
@@ -16,6 +16,7 @@ class MRUCache(BaseCaching):
         """
         super().__init__()
         self.cache_data = OrderedDict()
+        self.queue = deque()
 
     def put(self, key, item):
         """
@@ -29,12 +30,11 @@ class MRUCache(BaseCaching):
         if key in self.cache_data:
             del self.cache_data[key]
 
-        self.cache_data[key] = item
-
         # Removing the last item inserted
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            most_recent = self.cache_data.popitem(last=True)
-            print(f'DISCARD: {most_recent[0]}')
+            self.evict()
+
+        self.cache_data[key] = item
 
     def get(self, key):
         """
@@ -42,6 +42,11 @@ class MRUCache(BaseCaching):
         """
         if key is None or key not in self.cache_data.keys():
             return None
-
-        self.cache_data.move_to_end(key)
         return self.cache_data[key]
+
+    def evict(self):
+        """
+        Pop out the last item in the dictionary
+        """
+        last, _ = self.cache_data.popitem(last=True)
+        print(f'DISCARD: {last}')
