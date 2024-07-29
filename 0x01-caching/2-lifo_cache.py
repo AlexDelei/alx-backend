@@ -40,4 +40,3 @@ class LIFOCache(BaseCaching):
         """
         last = self.keys.pop()
         del self.cache_data[last]
-        print('DISCARD: ', last)
