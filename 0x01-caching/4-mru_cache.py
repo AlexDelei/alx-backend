@@ -16,7 +16,6 @@ class MRUCache(BaseCaching):
         """
         super().__init__()
         self.cache_data = OrderedDict()
-        self.queue = deque()
 
     def put(self, key, item):
         """
@@ -31,7 +30,7 @@ class MRUCache(BaseCaching):
             del self.cache_data[key]
 
         # Removing the last item inserted
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             self.evict()
 
         self.cache_data[key] = item
@@ -42,6 +41,8 @@ class MRUCache(BaseCaching):
         """
         if key is None or key not in self.cache_data.keys():
             return None
+
+        self.cache_data.move_to_end(key)
         return self.cache_data[key]
 
     def evict(self):
