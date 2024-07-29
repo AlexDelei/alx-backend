@@ -28,10 +28,10 @@ class LRUCache(BaseCaching):
 
         self.cache_data[key] = item
 
-        # Poping the first item inserted
+        # Poping the first item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             last = self.cache_data.popitem(last=False)
-            print("DISACRD: ", last[0])
+            print("DISCARD: ", last[0])
 
     def get(self, key):
         """
@@ -43,5 +43,4 @@ class LRUCache(BaseCaching):
         # Moving accessed item to the end to mark it as
         # recently used
         self.cache_data.move_to_end(key)
-        val = self.cache_data[key]
-        return val
+        return self.cache_data.get(key)
