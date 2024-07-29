@@ -28,12 +28,13 @@ class MRUCache(BaseCaching):
         # Update the key-value item
         if key in self.cache_data:
             del self.cache_data[key]
+
         self.cache_data[key] = item
 
         # Removing the last item inserted
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             most_recent = self.cache_data.popitem(last=True)
-            print("DISCARD: ", most_recent[0])
+            print(f'DISCARD: {most_recent[0]}')
 
     def get(self, key):
         """
