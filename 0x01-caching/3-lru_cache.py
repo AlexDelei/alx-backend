@@ -31,6 +31,7 @@ class LRUCache(BaseCaching):
         # Poping the first item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             last = self.cache_data.popitem(last=False)
+            print("DISCARD: ", last[0])
 
     def get(self, key):
         """
