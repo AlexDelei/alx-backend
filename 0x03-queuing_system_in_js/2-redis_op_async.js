@@ -1,11 +1,6 @@
 import { promisify } from 'util';
-import { createClient, print } from "redis";
-
-const client = createClient();
-client.on('error', error => console.log(`Redis client not connected to the server: ${error}`));
-client.on('ready', () => {
-  console.log('Redis client connected to the server');
-});
+import { print } from "redis";
+const client = require('./0-redis_client');
 
 const getAsync = promisify(client.GET).bind(client);
 
