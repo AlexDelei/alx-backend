@@ -1,9 +1,10 @@
 const kue = require('kue');
+
 const queue = kue.createQueue();
 
 const job = queue.create('push_notification_code', {
-    phoneNumber: '01999467992',
-    message: 'Hello there, welcome to my talk',
+  phoneNumber: '0239909882',
+  message: 'Hello too, thank you sir',
 });
 
 job
